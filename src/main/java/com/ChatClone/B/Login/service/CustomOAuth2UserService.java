@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import com.ChatClone.B.Login.model.SessionUser;
 import com.ChatClone.B.Login.model.User;
 
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 		
 		httpSession.setAttribute("user", new SessionUser(user));
 		
-		return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),attributes.getAttributes(),attributes.getNameAttributeKey());
+		return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),attributes.getAttributes(),attributes.getUsernameAttributeKey());
 	}
 	
 	private User saveOrUpdate(OAuthAttributes attributes) {

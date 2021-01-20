@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import com.ChatClone.B.Login.model.Role;
+import com.ChatClone.B.Login.service.CustomOAuth2UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.and()
 				.oauth2Login()
 					.userInfoEndpoint()
-						.UserService(customOAuth2UserService);
+						.userService(customOAuth2UserService);
 	}
 }
