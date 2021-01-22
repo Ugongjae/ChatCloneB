@@ -12,36 +12,39 @@ import lombok.Getter;
 @Getter
 public class OAuthAttributes {
 	private Map<String,Object> attributes;
-	private String usernameAttributeKey;
-	private String username;
+	private String nameAttributeKey;
 	private String name;
+	private String email;
+	private String picture;
 	
 	@Builder
-	public OAuthAttributes(Map<String,Object> attributes,String usernameAttributeKey,String username, String name) {
+	public OAuthAttributes(Map<String,Object> attributes,String nameAttributeKey,String name, String email,String picture) {
 		this.attributes=attributes;
-		this.usernameAttributeKey=usernameAttributeKey;
-		this.username=username;
+		this.nameAttributeKey=nameAttributeKey;
+		this.email=email;
+		this.picture=picture;
 		this.name=name;
 	}
 	
-	public static OAuthAttributes of(String registrationId,String userUsernameAttributeUsername,Map<String,Object> attributes) {
-		return ofCustom(userUsernameAttributeUsername,attributes);
+	public static OAuthAttributes of(String registrationId,String userNameAttrubiteName,Map<String,Object> attributes) {
+		return ofCustom(userNameAttrubiteName,attributes);
 	}
 	
-	public static OAuthAttributes ofCustom(String userUsernameAttributeUsername,Map<String,Object> attributes) {
+	public static OAuthAttributes ofCustom(String userNameAttributeName,Map<String,Object> attributes) {
 		return OAuthAttributes.builder()
-				.username((String)attributes.get("username"))
+				.email((String)attributes.get("email"))
 				.name((String)attributes.get("name"))
-				.attributes(attributes)
-				.usernameAttributeKey(userUsernameAttributeUsername)
+				.picture((String)attributes.get("picture"))
+				.nameAttributeKey(userNameAttributeName)
 				.build();
 	}
 	
 	public User toEntity() {
 		return User.builder()
-				.username(this.username)
 				.name(this.name)
-				.role(Role.USER)
+				.email(this.email)
+				.picture(this.picture)
+				.role(Role.GUEST)
 				.build();
 	}
 

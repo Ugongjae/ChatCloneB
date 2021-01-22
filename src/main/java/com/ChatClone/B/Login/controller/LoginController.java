@@ -5,4 +5,5 @@ import org.springframework.stereotype.Controller;
 import lombok.RequiredArgsConstructor;
 
 public class LoginController {
+	
 }
